@@ -13,7 +13,8 @@ References:
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
     <script type="module" src="./scripts/script.js"></script>
-    <script defer src="./scripts/overlay.js"></script>
+    <script defer src="./scripts/warningOverlay.js"></script>
+    <script defer src="./scripts/earthquakeInfoOverlay.js"></script>
   </head>
   <body>
     <!-- navbar section -->
@@ -22,13 +23,56 @@ References:
         <h1 class="logo">Earthquake Warning System Prototype V1</h1>
       </li>
       <li style="float: right">
+        <button data-info-modal-target="#earthquakeInfoModal">
+          View Earthquake Information
+        </button>
         <button data-modal-target="#modal">Demo Warning Alert</button>
       </li>
     </ul>
     <!-- end of navbar section -->
 
+    <!-- New modal overlay for earthquake information -->
+    <div class="modal" id="earthquakeInfoModal">
+      <div class="modal-header">
+        <div class="title">Earthquake Information</div>
+        <button data-info-close-button class="close-button">x</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Earthquakes are caused by the sudden release of energy in the Earth's
+          crust, creating seismic waves that shake the ground. They can vary in
+          magnitude, depth, and location.
+        </p>
+        <h3>Magnitude</h3>
+        <p>
+          Magnitude measures the energy released by an earthquake, with higher
+          magnitudes indicating stronger earthquakes.
+        </p>
+        <h3>Hypocentral Depth</h3>
+        <p>
+          Hypocentral depth refers to the depth at which an earthquake occurs
+          beneath the Earth's surface. It is an essential factor in
+          understanding the earthquake's impact on the surface and the potential
+          for damage.
+        </p>
+        <h3>Earthquake Hazards</h3>
+        <p>
+          Earthquakes can cause various hazards, including ground shaking,
+          landslides, tsunamis, and structural damage to buildings. It's
+          important to be prepared and know what to do during an earthquake.
+        </p>
+      </div>
+    </div>
+    <div id="earthquakeInfoOverlay"></div>
+
+    <!-- end of modal overlay for earthquake information -->
+
     <!-- earthquake warning sound -->
-    <audio id="sirenSound" src="./assets/Voicy_Earthquake Siren.mp3" loop></audio>
+    <audio
+      id="sirenSound"
+      src="./assets/Voicy_Earthquake Siren.mp3"
+      loop
+    ></audio>
 
     <!-- modal overlay -->
     <div class="modal" id="modal">

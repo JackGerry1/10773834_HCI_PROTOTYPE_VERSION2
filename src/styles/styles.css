@@ -94,7 +94,7 @@ References:
 }
 
 /* styling for the overlay when revealed */
-#overlay {
+#overlay, #earthquakeInfoOverlay {
   position: fixed;
   opacity: 0;
   transition: 200ms ease-in-out;
@@ -107,7 +107,7 @@ References:
 }
 
 /* styling for the overlay when active */
-#overlay.active {
+#overlay.active, #earthquakeInfoOverlay.active {
   opacity: 1;
   pointer-events: all;
 }
