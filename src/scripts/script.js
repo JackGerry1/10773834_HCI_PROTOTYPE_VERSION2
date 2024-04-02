@@ -15,13 +15,10 @@ References:
 
 import customMapStyles from "./mapStyles.js";
 
-// define the map and marker global variables
+// Define the map and marker global variables
 let map, marker;
 
-// earthquake api variable
-const earthquakeDataURL =
-  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson";
-
+// Function to initialize the map
 function initMap() {
   // Define the bounds for the map to restrict the view
   const bounds = {
@@ -40,9 +37,10 @@ function initMap() {
     styles: customMapStyles,
     restriction: {
       latLngBounds: bounds,
-      strictBounds: false, 
+      strictBounds: false,
     },
   });
+
   // Try to get the user's current location by lat and lng
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -69,51 +67,31 @@ function initMap() {
   } else {
     console.error("Geolocation is not supported by this browser.");
   }
+
   // window to store earthquake information
   const infoWindow = new google.maps.InfoWindow({
     minWidth: 200,
     maxWidth: 200,
   });
 
-  // Load USGS earthquake data for the last month >= 4.5 magnitude
-  fetch(earthquakeDataURL)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      // Modify GeoJSON data to include depth information in properties
-      data.features.forEach((feature) => {
-        const depth = feature.geometry.coordinates[2];
-        feature.properties.depth = depth;
-      });
-
-      // Load modified GeoJSON data onto the map
-      map.data.addGeoJson(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching earthquake data:", error);
-    });
-
-  // return dynamically sized circle icons based on the magnitude of the earthquake and a different coloured circle based on depth
-  map.data.setStyle((feature) => {
-    const magnitude = feature.getProperty("mag");
-    const depth = feature.getProperty("depth");
-    return {
-      icon: getCircle(magnitude, depth),
-    };
-  });
+  // Load USGS earthquake data for the last month >= 4.5 magnitude by default
+  loadEarthquakeData();
 
   // onclick display the window with the lat, lng, and magnitude of the earthquake
   map.data.addListener("click", (event) => {
     const magnitude = event.feature.getProperty("mag");
     const place = event.feature.getProperty("place");
-    const depth = event.feature.getProperty("depth"); 
+    const depth = event.feature.getProperty("depth");
+    const time = event.feature.getProperty("time");
     const location = event.feature.getGeometry().get();
     const latitude = location.lat();
     const longitude = location.lng();
+
+    // Convert timestamp to Date object
+    const date = new Date(parseInt(time));
+
+    // Format date and time
+    const formattedTime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
     // store the earthquake info so it can be rendered later
     const earthquakeInfo = {
@@ -122,18 +100,20 @@ function initMap() {
       longitude: longitude,
       place: place,
       depth: depth,
+      time: formattedTime,
     };
 
     // render the HTML for the earthquake information from the API
     const infoWindowContent = `
-    <div class="info-window">
-      <h3>Earthquake Information</h3>
-      <p><span>Place:</span> ${earthquakeInfo.place}</p>
-      <p><span>Latitude:</span> ${earthquakeInfo.latitude}</p>
-      <p><span>Longitude:</span> ${earthquakeInfo.longitude}</p>
-      <p><span>Magnitude:</span> ${earthquakeInfo.magnitude}</p>
-      <p><span>Depth:</span> ${earthquakeInfo.depth}</p>      
-    </div>
+      <div class="info-window">
+        <h3>Earthquake Information</h3>
+        <p><span>Place:</span> ${earthquakeInfo.place}</p>
+        <p><span>Latitude:</span> ${earthquakeInfo.latitude}</p>
+        <p><span>Longitude:</span> ${earthquakeInfo.longitude}</p>
+        <p><span>Magnitude:</span> ${earthquakeInfo.magnitude}</p>
+        <p><span>Depth:</span> ${earthquakeInfo.depth}</p>
+        <p><span>Time Of Earthquake:</span> ${earthquakeInfo.time}</p>          
+      </div>
     `;
 
     // display the window and set its position to the position of the earthquake
@@ -169,6 +149,56 @@ function getCircle(magnitude, depth) {
     strokeColor: "white",
     strokeWeight: 0.5,
   };
+}
+
+// Function to load earthquake data based on the selected radio button
+function loadEarthquakeData() {
+  // Define the earthquake API base URL
+  const earthquakeAPIBaseURL =
+    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/";
+
+  // Get the selected radio button value
+  const selectedRadio = document.querySelector(
+    'input[name="earthquakeType"]:checked'
+  ).value;
+
+  // Construct the full URL based on the selected radio button value
+  const earthquakeDataURL = earthquakeAPIBaseURL + selectedRadio;
+
+  // Clear existing earthquake data on the map
+  map.data.forEach(function (feature) {
+    map.data.remove(feature);
+  });
+
+  // Fetch earthquake data based on the selected URL
+  fetch(earthquakeDataURL)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Modify GeoJSON data to include depth information in properties
+      data.features.forEach((feature) => {
+        const depth = feature.geometry.coordinates[2];
+        feature.properties.depth = depth;
+      });
+
+      // Load modified GeoJSON data onto the map
+      map.data.addGeoJson(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching earthquake data:", error);
+    });
+  // return dynamically sized circle icons based on the magnitude of the earthquake and a different coloured circle based on depth
+  map.data.setStyle((feature) => {
+    const magnitude = feature.getProperty("mag");
+    const depth = feature.getProperty("depth");
+    return {
+      icon: getCircle(magnitude, depth),
+    };
+  });
 }
 
 // render the google map
