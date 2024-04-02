@@ -1,0 +1,113 @@
+<!--
+References:
+- Web Dev Simplified (2019). Build a Popup With JavaScript. [online] 
+  Youtube. Available at: https://www.youtube.com/watch?v=MBaw_6cPmAw [Accessed 8 Feb. 2024].
+
+  this reference was used from line 30 to 56
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Earthquake Warning System Prototype V1</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+    <script type="module" src="./scripts/script.js"></script>
+    <script defer src="./scripts/overlay.js"></script>
+  </head>
+  <body>
+    <!-- navbar section -->
+    <ul>
+      <li>
+        <h1 class="logo">Earthquake Warning System Prototype V1</h1>
+      </li>
+      <li style="float: right">
+        <button data-modal-target="#modal">Demo Warning Alert</button>
+      </li>
+    </ul>
+    <!-- end of navbar section -->
+
+    <!-- modal overlay -->
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">
+          ⚠️ Warning: Earthquake Detected Near Your Location
+        </div>
+        <button data-close-button class="close-button">x</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          An earthquake with significant magnitude has been detected near your
+          area. Please take necessary precautions and stay safe.
+        </p>
+        <div class="images-container">
+          <img src="./assets/Drop.png" alt="" class="modal-image" />
+          <img src="./assets/Cover.png" alt="" class="modal-image" />
+          <img src="./assets/HoldOn.png" alt="" class="modal-image" />
+        </div>
+        <p>
+          During earthquakes, drop to the floor, take cover under a desk or
+          table, and hold on to it so that it doesn't move a way from you. Wait
+          there until the shaking stops
+        </p>
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <!-- end of modal overlay section -->
+
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <!-- Depth Of Earthquake Elements (Bottom Left) -->
+    <div class="bottom-left">
+      <span>Depth Of Earthquake In KM/Miles</span>
+      <div class="container">
+        <div class="square very-shallow">
+          <div class="text-container">
+            <div class="text">0-70KM (0-43.5 miles)</div>
+          </div>
+        </div>
+        <div class="square shallow">
+          <div class="text-container">
+            <div class="text">71-300KM (43.6-186.4 miles)</div>
+          </div>
+        </div>
+        <div class="square intermediate">
+          <div class="text-container">
+            <div class="text">301-500KM (186.5-310.7 miles)</div>
+          </div>
+        </div>
+        <div class="square deep">
+          <div class="text-container">
+            <div class="text">501-700KM (310.8-435.0 miles)</div>
+          </div>
+        </div>
+        <div class="square very-deep">
+          <div class="text-container">
+            <div class="text">701-800KM (435.1-497.1 miles)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of Depth Of Earthquake Elements (Bottom Left) -->
+
+    <!-- Magnitude Of Earthquake Section (Bottom Right) -->
+    <div class="bottom-right">
+      <span>Magnitude Of Earthquake</span>
+      <div class="circle-container">
+        <div class="circle">4</div>
+        <div class="circle">5</div>
+        <div class="circle">6</div>
+        <div class="circle">7</div>
+        <div class="circle">8</div>
+        <div class="circle">9</div>
+      </div>
+    </div>
+
+    <!--script to import the google maps api -->
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1e-poeyTzCFA-sfSkr7Dmoe5aIwvWX6Y&loading=async&callback=initMap"
+    ></script>
+  </body>
+</html>

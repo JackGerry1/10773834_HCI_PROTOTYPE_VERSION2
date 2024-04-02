@@ -1,0 +1,11 @@
+{
+  "name": "10773834_hci_prototype_version1",
+  "version": "1.0.0",
+  "description": "earthquake version 1 prototype",
+  "scripts": {
+    "start": "live-server src"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

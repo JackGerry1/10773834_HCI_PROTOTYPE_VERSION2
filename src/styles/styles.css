@@ -1,0 +1,278 @@
+/* 
+set the map height explicitly to define the size of the div element that contains the map. 
+ */
+#map {
+  height: 100%;
+}
+
+/* Makes the page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+
+/*
+References:
+- Web Dev Simplified (2019). Build a Popup With JavaScript. [online] 
+  Youtube. Available at: https://www.youtube.com/watch?v=MBaw_6cPmAw [Accessed 8 Feb. 2024].
+
+  this reference was used from line 25 to 146
+*/
+
+/* styling for the modals */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 800px;
+  max-width: 80%;
+}
+
+/* styling for when the modal is active */
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* styling for modal header */
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid red; 
+}
+
+/* styling for the modal title */
+.modal-header .title {
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: red; 
+}
+
+/* styling for the close button */
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 50%;
+  background: #eee;
+  color: black;
+  padding: 0.5rem 0.7rem;
+  transform: translate(10px, -10px);
+}
+
+/* styling for the modal body */
+.modal-body {
+  padding: 10px 15px;
+  color: #333; 
+  font-size: 1.2rem; 
+  font-weight: bold; 
+}
+
+/* styling for the image container within the modal */
+.images-container {
+  display: flex;
+  align-items: center; 
+}
+
+/* styling for the images */
+.modal-image {
+  width: 250px; 
+  margin-right: 10px; 
+}
+
+/* styling for the overlay when revealed */
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* styling for the overlay when active */
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* styling for the info window */
+.info-window {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+/* styling for the p text info window */
+.info-window p span {
+  font-weight: bold;
+}
+
+/* styling for the list in the info window */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #7b0000;
+}
+
+/* li elements need to be on the left */
+li {
+  float: left;
+}
+
+/* styling for logo image */
+.logo {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+  padding: 10px 20px;
+}
+
+/* styling for navbar button */
+button {
+  background-color: #007bff;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* styling for on button-hover effect */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the elements in the bottom left corner */
+.bottom-left {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
+
+/* styling for the container in the bottom left */
+.container {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: auto; 
+  grid-auto-rows: auto; 
+  gap: 20px; 
+}
+
+/* styling for the coloured squares */
+.square {
+  width: 35px;
+  height: 35px;
+}
+
+/* styling for the different colours of the squares */
+.very-shallow {
+  background-color: red;
+}
+
+.shallow {
+  background-color: orange;
+}
+
+.intermediate {
+  background-color: yellow;
+}
+
+.deep {
+  background-color: purple;
+}
+
+.very-deep {
+  background-color: blue;
+}
+
+/* styiling for the text that is in line with their corresponding squares */
+.text-container {
+  margin-left: 40px; 
+}
+
+/* additional styling for the text */
+.text {
+  margin-top: 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* styling for the bottom right corner */
+.bottom-right {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+
+/* styling for circle container */
+.circle-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 10px; 
+}
+
+/* styling for the circles */
+.circle {
+  width: 30px; 
+  height: 30px; 
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* set styling for the circle children, each of them getting bigger */
+.circle:nth-child(2) {
+  width: 40px;
+  height: 40px;
+}
+
+.circle:nth-child(3) {
+  width: 50px;
+  height: 50px;
+}
+
+.circle:nth-child(4) {
+  width: 60px;
+  height: 60px;
+}
+
+.circle:nth-child(5) {
+  width: 70px;
+  height: 70px;
+}
+
+.circle:nth-child(6) {
+  width: 80px;
+  height: 80px;
+}
+
+.circle:last-child {
+  margin-right: 0;
+}
