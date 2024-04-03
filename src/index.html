@@ -15,6 +15,8 @@ References:
     <script type="module" src="./scripts/script.js"></script>
     <script defer src="./scripts/warningOverlay.js"></script>
     <script defer src="./scripts/earthquakeInfoOverlay.js"></script>
+    <script defer src="./scripts/earthquakeDataChangePopup.js"></script>
+    <script defer src="./scripts/changeEarthquakeData.js"></script>
   </head>
   <body>
     <!-- navbar section -->
@@ -22,37 +24,10 @@ References:
       <li>
         <h1 class="logo">Earthquake Warning System Prototype V1</h1>
       </li>
-      <li>
-        <form>
-          <div>
-            <input
-              type="radio"
-              id="lastMonth"
-              name="earthquakeType"
-              value="4.5_month.geojson"
-              checked
-            />
-            <label for="lastMonth">4.5+ earthquakes from last month</label
-            ><br />
-            <input
-              type="radio"
-              id="lastDay"
-              name="earthquakeType"
-              value="4.5_day.geojson"
-            />
-            <label for="lastDay">4.5+ from last day</label><br />
-            <input
-              type="radio"
-              id="lastHour"
-              name="earthquakeType"
-              value="1.0_hour.geojson"
-            />
-            <label for="lastHour">1.0+ from the last hour</label><br />
-            <script src="./scripts/changeEarthquakeData.js"></script>
-          </div>
-        </form>
-      </li>
       <li style="float: right">
+        <button data-change-modal-target="#changeEarthquakeDataModal">
+          Change Earthquake Data
+        </button>
         <button data-info-modal-target="#earthquakeInfoModal">
           View Earthquake Information
         </button>
@@ -61,7 +36,198 @@ References:
     </ul>
     <!-- end of navbar section -->
 
-    <!-- New modal overlay for earthquake information -->
+    <!-- modal overlay for changing earthquake data -->
+    <div class="modal" id="changeEarthquakeDataModal">
+      <div class="modal-header">
+        <div class="title">Change Earthquake Data</div>
+        <button data-change-modal-close-button class="close-button">x</button>
+      </div>
+      <div class="modal-body">
+        <form id="earthquakeForm">
+          <h3>Earthquakes In The Past Hour</h3>
+          <input
+            type="radio"
+            id="significantLastHour"
+            name="earthquakeType"
+            value="significant_hour.geojson"
+          />
+          <label for="significantLastHour"
+            >Significant earthquakes from last hour</label
+          ><br />
+
+          <input
+            type="radio"
+            id="4.5LastHour"
+            name="earthquakeType"
+            value="4.5_hour.geojson"
+          />
+          <label for="4.5LastHour">4.5+ earthquakes from last hour</label><br />
+
+          <input
+            type="radio"
+            id="2.5LastHour"
+            name="earthquakeType"
+            value="2.5_hour.geojson"
+          />
+          <label for="2.5LastHour">2.5+ earthquakes from last hour</label><br />
+
+          <input
+            type="radio"
+            id="1.0LastHour"
+            name="earthquakeType"
+            value="1.0_hour.geojson"
+          />
+          <label for="1.0LastHour">1.0+ earthquakes from last hour</label><br />
+
+          <input
+            type="radio"
+            id="allLastHour"
+            name="earthquakeType"
+            value="all_hour.geojson"
+          />
+          <label for="allLastHour">All earthquakes from last hour</label><br />
+
+          <h3>Earthquakes In The Past Day</h3>
+          <input
+            type="radio"
+            id="significantLastDay"
+            name="earthquakeType"
+            value="significant_day.geojson"
+          />
+          <label for="significantLastDay"
+            >Significant earthquakes from last day</label
+          ><br />
+
+          <input
+            type="radio"
+            id="4.5LastDay"
+            name="earthquakeType"
+            value="4.5_day.geojson"
+          />
+          <label for="4.5LastDay">4.5+ earthquakes from last day</label><br />
+
+          <input
+            type="radio"
+            id="2.5LastDay"
+            name="earthquakeType"
+            value="2.5_day.geojson"
+          />
+          <label for="2.5LastDay">2.5+ earthquakes from last day</label><br />
+
+          <input
+            type="radio"
+            id="1.0LastDay"
+            name="earthquakeType"
+            value="1.0_day.geojson"
+          />
+          <label for="1.0LastDay">1.0+ earthquakes from last day</label><br />
+
+          <input
+            type="radio"
+            id="allLastDay"
+            name="earthquakeType"
+            value="all_day.geojson"
+          />
+          <label for="allLastDay">All earthquakes from last day</label><br />
+
+          <h3>Earthquakes In The Past Week</h3>
+
+          <input
+            type="radio"
+            id="significantLastWeek"
+            name="earthquakeType"
+            value="significant_week.geojson"
+          />
+          <label for="significantLastWeek"
+            >Significant earthquakes from last week</label
+          ><br />
+
+          <input
+            type="radio"
+            id="4.5LastWeek"
+            name="earthquakeType"
+            value="4.5_week.geojson"
+          />
+          <label for="4.5LastWeek">4.5+ earthquakes from last week</label><br />
+
+          <input
+            type="radio"
+            id="2.5LastWeek"
+            name="earthquakeType"
+            value="2.5_week.geojson"
+          />
+          <label for="2.5LastWeek">2.5+ earthquakes from last week</label><br />
+
+          <input
+            type="radio"
+            id="1.0LastWeek"
+            name="earthquakeType"
+            value="1.0_week.geojson"
+          />
+          <label for="1.0LastWeek">1.0+ earthquakes from last week</label><br />
+
+          <input
+            type="radio"
+            id="allLastWeek"
+            name="earthquakeType"
+            value="all_week.geojson"
+          />
+          <label for="allLastWeek">All earthquakes from last week</label><br />
+
+          <h3>Earthquakes In The Past Month</h3>
+
+          <input
+            type="radio"
+            id="significantLastMonth"
+            name="earthquakeType"
+            value="significant_month.geojson"
+          />
+          <label for="significantLastMonth"
+            >Significant earthquakes from last month</label
+          ><br />
+
+          <input
+            type="radio"
+            id="4.5LastMonth"
+            name="earthquakeType"
+            value="4.5_month.geojson"
+            checked
+          />
+          <label for="4.5LastMonth">4.5+ earthquakes from last month</label
+          ><br />
+
+          <input
+            type="radio"
+            id="2.5LastMonth"
+            name="earthquakeType"
+            value="2.5_month.geojson"
+          />
+          <label for="2.5LastMonth">2.5+ earthquakes from last month</label
+          ><br />
+
+          <input
+            type="radio"
+            id="1.0LastMonth"
+            name="earthquakeType"
+            value="1.0_month.geojson"
+          />
+          <label for="1.0LastMonth">1.0+ earthquakes from last month</label
+          ><br />
+
+          <input
+            type="radio"
+            id="allLastMonth"
+            name="earthquakeType"
+            value="all_month.geojson"
+          />
+          <label for="allLastMonth">All earthquakes from last month</label
+          ><br />
+        </form>
+      </div>
+    </div>
+    <div id="changeEarthquakeDataOverlay"></div>
+
+    <!-- modal overlay for earthquake information -->
     <div class="modal" id="earthquakeInfoModal">
       <div class="modal-header">
         <div class="title">Earthquake Information</div>

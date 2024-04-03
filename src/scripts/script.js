@@ -11,15 +11,18 @@ References:
 
 - Vieira, S. (2021). How To Use the JavaScript Fetch API to Get Data | DigitalOcean. [online] 
   www.digitalocean.com. Available at: https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data [Accessed 14 Feb. 2024].
-*/
+
+https://www.folio3.com/mobile/blog/what-is-google-maps-geometry-library-how-it-works/ access april 3rd 2024 
+  */
 
 import customMapStyles from "./mapStyles.js";
 
 // Define the map and marker global variables
-let map, marker;
-
+let map, marker, userLocation, distance;
 // Function to initialize the map
 function initMap() {
+  google.maps.importLibrary("geometry");
+
   // Define the bounds for the map to restrict the view
   const bounds = {
     north: 85, // Maximum latitude
@@ -45,7 +48,7 @@ function initMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const userLocation = {
+        userLocation = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
@@ -68,16 +71,7 @@ function initMap() {
     console.error("Geolocation is not supported by this browser.");
   }
 
-  // window to store earthquake information
-  const infoWindow = new google.maps.InfoWindow({
-    minWidth: 200,
-    maxWidth: 200,
-  });
-
-  // Load USGS earthquake data for the last month >= 4.5 magnitude by default
-  loadEarthquakeData();
-
-  // onclick display the window with the lat, lng, and magnitude of the earthquake
+  // onclick display the window with the lat, lng, magnitude, and distance of the earthquake
   map.data.addListener("click", (event) => {
     const magnitude = event.feature.getProperty("mag");
     const place = event.feature.getProperty("place");
@@ -87,40 +81,71 @@ function initMap() {
     const latitude = location.lat();
     const longitude = location.lng();
 
+    if (userLocation) {
+      // Extract latitude and longitude from userLocation
+      const userLatlng = new google.maps.LatLng(
+        userLocation.lat,
+        userLocation.lng
+      );
+
+      // Extract latitude and longitude from earthquake location
+      const earthquakeLatlng = new google.maps.LatLng(latitude, longitude);
+
+      // Calculate the distance between the user's location and the earthquake location
+      distance = google.maps.geometry.spherical.computeDistanceBetween(
+        userLatlng,
+        earthquakeLatlng
+      );
+
+      // Rest of your code inside the if block
+    }
+
+    // Convert distance to kilometers and round to 2 decimal places
+    const distanceKm = (distance / 1000).toFixed(2);
+
     // Convert timestamp to Date object
     const date = new Date(parseInt(time));
 
     // Format date and time
     const formattedTime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-    // store the earthquake info so it can be rendered later
-    const earthquakeInfo = {
-      magnitude: magnitude,
-      latitude: latitude,
-      longitude: longitude,
-      place: place,
-      depth: depth,
-      time: formattedTime,
-    };
+    // Check if distanceKm is NaN
+    let distanceMessage;
+    if (isNaN(distanceKm)) {
+      distanceMessage =
+        "Enable current location to calculate distance from earthquake";
+    } else {
+      distanceMessage = `${distanceKm}KM`;
+    }
 
-    // render the HTML for the earthquake information from the API
+    // Render the HTML for the earthquake information from the API
     const infoWindowContent = `
-      <div class="info-window">
-        <h3>Earthquake Information</h3>
-        <p><span>Place:</span> ${earthquakeInfo.place}</p>
-        <p><span>Latitude:</span> ${earthquakeInfo.latitude}</p>
-        <p><span>Longitude:</span> ${earthquakeInfo.longitude}</p>
-        <p><span>Magnitude:</span> ${earthquakeInfo.magnitude}</p>
-        <p><span>Depth:</span> ${earthquakeInfo.depth}</p>
-        <p><span>Time Of Earthquake:</span> ${earthquakeInfo.time}</p>          
-      </div>
+    <div class="info-window">
+      <h3>Earthquake Information</h3>
+      <p><span>Place:</span> ${place}</p>
+      <p><span>Latitude:</span> ${latitude}</p>
+      <p><span>Longitude:</span> ${longitude}</p>
+      <p><span>Magnitude:</span> ${magnitude}</p>
+      <p><span>Depth:</span> ${depth}KM</p>
+      <p><span>Time Of Earthquake:</span> ${formattedTime}</p>
+      <p><span>Distance from Your Location:</span> ${distanceMessage}</p>
+    </div>
     `;
 
-    // display the window and set its position to the position of the earthquake
+    // Display the window and set its position to the position of the earthquake
     infoWindow.setContent(infoWindowContent);
     infoWindow.setPosition(location);
     infoWindow.open(map);
   });
+
+  // window to store earthquake information
+  const infoWindow = new google.maps.InfoWindow({
+    minWidth: 200,
+    maxWidth: 200,
+  });
+
+  // Load USGS earthquake data for the last month >= 4.5 magnitude by default
+  loadEarthquakeData();
 }
 
 // create a red circle with size based on the magnitude of the earthquake
@@ -187,19 +212,25 @@ function loadEarthquakeData() {
 
       // Load modified GeoJSON data onto the map
       map.data.addGeoJson(data);
+
+      // Set map data style after loading GeoJSON data
+      map.data.setStyle((feature) => {
+        const magnitude = feature.getProperty("mag");
+        const depth = feature.getProperty("depth");
+        return {
+          icon: getCircle(magnitude, depth),
+        };
+      });
     })
     .catch((error) => {
       console.error("Error fetching earthquake data:", error);
     });
-  // return dynamically sized circle icons based on the magnitude of the earthquake and a different coloured circle based on depth
-  map.data.setStyle((feature) => {
-    const magnitude = feature.getProperty("mag");
-    const depth = feature.getProperty("depth");
-    return {
-      icon: getCircle(magnitude, depth),
-    };
-  });
 }
+
+// Add event listeners to radio buttons for earthquake data selection
+document.querySelectorAll('input[name="earthquakeType"]').forEach((radio) => {
+  radio.addEventListener("change", loadEarthquakeData);
+});
 
 // render the google map
 window.initMap = initMap;

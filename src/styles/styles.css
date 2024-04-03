@@ -48,14 +48,14 @@ References:
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid red; 
+  border-bottom: 1px solid red;
 }
 
 /* styling for the modal title */
 .modal-header .title {
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
   font-weight: bold;
-  color: red; 
+  color: red;
 }
 
 /* styling for the close button */
@@ -76,25 +76,27 @@ References:
 /* styling for the modal body */
 .modal-body {
   padding: 10px 15px;
-  color: #333; 
-  font-size: 1.2rem; 
-  font-weight: bold; 
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 /* styling for the image container within the modal */
 .images-container {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 /* styling for the images */
 .modal-image {
-  width: 250px; 
-  margin-right: 10px; 
+  width: 250px;
+  margin-right: 10px;
 }
 
-/* styling for the overlay when revealed */
-#overlay, #earthquakeInfoOverlay {
+/* styling for the overlays when revealed */
+#overlay,
+#earthquakeInfoOverlay,
+#changeEarthquakeDataOverlay {
   position: fixed;
   opacity: 0;
   transition: 200ms ease-in-out;
@@ -106,8 +108,10 @@ References:
   pointer-events: none;
 }
 
-/* styling for the overlay when active */
-#overlay.active, #earthquakeInfoOverlay.active {
+/* styling for the overlays when active */
+#overlay.active,
+#earthquakeInfoOverlay.active,
+#changeEarthquakeDataOverlay.active {
   opacity: 1;
   pointer-events: all;
 }
@@ -173,9 +177,9 @@ button:hover {
 .container {
   margin-top: 10px;
   display: grid;
-  grid-template-columns: auto; 
-  grid-auto-rows: auto; 
-  gap: 20px; 
+  grid-template-columns: auto;
+  grid-auto-rows: auto;
+  gap: 20px;
 }
 
 /* styling for the coloured squares */
@@ -207,7 +211,7 @@ button:hover {
 
 /* styiling for the text that is in line with their corresponding squares */
 .text-container {
-  margin-left: 40px; 
+  margin-left: 40px;
 }
 
 /* additional styling for the text */
@@ -228,15 +232,15 @@ button:hover {
 /* styling for circle container */
 .circle-container {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  margin-top: 10px; 
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
 /* styling for the circles */
 .circle {
-  width: 30px; 
-  height: 30px; 
+  width: 30px;
+  height: 30px;
   background-color: transparent;
   border: 1px solid white;
   border-radius: 50%;
