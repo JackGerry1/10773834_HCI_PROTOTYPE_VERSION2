@@ -13,6 +13,8 @@ References:
   www.digitalocean.com. Available at: https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data [Accessed 14 Feb. 2024].
 
 https://www.folio3.com/mobile/blog/what-is-google-maps-geometry-library-how-it-works/ access april 3rd 2024 
+
+https://developers.google.com/maps/documentation/javascript/reference/geometry#spherical.computeDistanceBetween access april 3rd 2024 
   */
 
 import customMapStyles from "./mapStyles.js";
