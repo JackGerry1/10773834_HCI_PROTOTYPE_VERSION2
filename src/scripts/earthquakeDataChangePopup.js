@@ -1,3 +1,10 @@
+/*
+References:
+- Web Dev Simplified (2019). Build a Popup With JavaScript. [online] 
+  Youtube. Available at: https://www.youtube.com/watch?v=MBaw_6cPmAw [Accessed 8 Feb. 2024].
+*/
+
+
 // variables for opening, closing buttons and overlay for change earthquake data modal
 const openChangeModalButtons = document.querySelectorAll(
   "[data-change-modal-target]"

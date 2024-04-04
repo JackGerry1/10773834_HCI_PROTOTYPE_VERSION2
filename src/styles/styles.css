@@ -120,6 +120,7 @@ References:
 .info-window {
   background-color: #f0f0f0;
   padding: 10px;
+  font-size: medium;
 }
 
 /* styling for the p text info window */

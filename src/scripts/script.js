@@ -3,26 +3,33 @@ References:
 - Google (2024a). Geolocation: Displaying User or Device Position on Maps | Maps JavaScript API. [online] 
   Google. Available at: https://developers.google.com/maps/documentation/javascript/geolocation#maps_map_geolocation-javascript [Accessed 31 Jan. 2024].
 
-- Google (2024b). Restricting Map Bounds | Maps JavaScript API. [online] 
+- Google (2024b). Geometry Library | Maps JavaScript API. [Online] 
+  Google. Available at: https://developers.google.com/maps/documentation/javascript/reference/geometry#spherical.computeDistanceBetween [Accessed 3 Apr. 2024].
+
+- Google (2024c). Restricting Map Bounds | Maps JavaScript API. [online] 
   Google. Available at: https://developers.google.com/maps/documentation/javascript/examples/control-bounds-restriction [Accessed 13 Feb. 2024].
 
-- Google (2024c). Visualizing Data: Mapping Earthquakes | Maps JavaScript API. [online] 
+- Google (2024d). Visualizing Data: Mapping Earthquakes | Maps JavaScript API. [online] 
   Google. Available at: https://developers.google.com/maps/documentation/javascript/earthquakes [Accessed 5 Feb. 2024].
 
 - Vieira, S. (2021). How To Use the JavaScript Fetch API to Get Data | DigitalOcean. [online] 
   www.digitalocean.com. Available at: https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data [Accessed 14 Feb. 2024].
 
-https://www.folio3.com/mobile/blog/what-is-google-maps-geometry-library-how-it-works/ access april 3rd 2024 
+- MDN Web Docs. (2023). Date. [Online] 
+  MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date [Accessed 3 Apr. 2024].
 
-https://developers.google.com/maps/documentation/javascript/reference/geometry#spherical.computeDistanceBetween access april 3rd 2024 
-  */
+- msaqlain (2021). What Is Google Maps Geometry Library & How It Works? [Online] 
+  Mobile App Development Services. Available at: https://www.folio3.com/mobile/blog/what-is-google-maps-geometry-library-how-it-works/ [Accessed 3 Apr. 2024].
+*/
 
 import customMapStyles from "./mapStyles.js";
 
-// Define the map and marker global variables
+// Define the map, userLocation, distance and marker global variables
 let map, marker, userLocation, distance;
 // Function to initialize the map
 function initMap() {
+
+  // imported to calculated distance between user and earthquake location
   google.maps.importLibrary("geometry");
 
   // Define the bounds for the map to restrict the view
@@ -83,8 +90,8 @@ function initMap() {
     const latitude = location.lat();
     const longitude = location.lng();
 
+    // Extract latitude and longitude from userLocation if user has granted access to it
     if (userLocation) {
-      // Extract latitude and longitude from userLocation
       const userLatlng = new google.maps.LatLng(
         userLocation.lat,
         userLocation.lng
@@ -98,8 +105,6 @@ function initMap() {
         userLatlng,
         earthquakeLatlng
       );
-
-      // Rest of your code inside the if block
     }
 
     // Convert distance to kilometers and round to 2 decimal places
@@ -109,9 +114,9 @@ function initMap() {
     const date = new Date(parseInt(time));
 
     // Format date and time
-    const formattedTime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const formattedTime = `${date.toLocaleString()}`;
 
-    // Check if distanceKm is NaN
+    // Check if distanceKm is NaN, which occurs when users block access to their location
     let distanceMessage;
     if (isNaN(distanceKm)) {
       distanceMessage =
@@ -142,8 +147,8 @@ function initMap() {
 
   // window to store earthquake information
   const infoWindow = new google.maps.InfoWindow({
-    minWidth: 200,
-    maxWidth: 200,
+    minWidth: 350,
+    maxWidth: 350,
   });
 
   // Load USGS earthquake data for the last month >= 4.5 magnitude by default
