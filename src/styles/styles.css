@@ -228,6 +228,7 @@ button:hover {
   bottom: 20px;
   right: 20px;
   color: white;
+  text-align: center;
 }
 
 /* styling for circle container */
@@ -240,8 +241,8 @@ button:hover {
 
 /* styling for the circles */
 .circle {
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   background-color: transparent;
   border: 1px solid white;
   border-radius: 50%;
@@ -254,28 +255,43 @@ button:hover {
 
 /* set styling for the circle children, each of them getting bigger */
 .circle:nth-child(2) {
+  width: 20px;
+  height: 20px;
+}
+
+.circle:nth-child(3) {
+  width: 30px;
+  height: 30px;
+}
+
+.circle:nth-child(4) {
   width: 40px;
   height: 40px;
 }
 
-.circle:nth-child(3) {
+.circle:nth-child(5) {
   width: 50px;
   height: 50px;
 }
 
-.circle:nth-child(4) {
+.circle:nth-child(6) {
   width: 60px;
   height: 60px;
 }
 
-.circle:nth-child(5) {
+.circle:nth-child(7) {
   width: 70px;
   height: 70px;
 }
 
-.circle:nth-child(6) {
+.circle:nth-child(8) {
   width: 80px;
   height: 80px;
+}
+
+.circle:nth-child(9) {
+  width: 90px;
+  height: 90px;
 }
 
 .circle:last-child {
