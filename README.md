@@ -1,7 +1,7 @@
 # EARTH QUAKE WARNING SYSTEM VERSION 2 PROTOTYPE
 
 ## What Is The Purpose Of The Prototype?
-This prototype is meant to be used on laptops and desktops. It allows users to gather information about earthquakes happening around the globe, even the ones near their current location. It will also allows users to see a demonstration warning if an earthquake occurs too close to their current location. 
+This prototype is meant to be used on laptops and desktops. It allows users to gather information about earthquakes happening around the globe, even the ones near their current location. It will also allows users to see a demonstration warning if an earthquake occurs too close to their current location. It has added inforation about how close earthquakes are to the current users location, audio warning alarms and multiple popup windows. 
 
 ## Installation And Locally Hosting Instructions
 
@@ -45,20 +45,10 @@ This prototype is meant to be used on laptops and desktops. It allows users to g
 - Renders Circles Reperesenting Earthquakes From USGS API
 - Styles Circles Based On Depth And Magnitude
 - Handles Onclick Events For The Rendered Circles To Show More Information About Each Earthquake
-- Calculates the distance between the earthquakes and the current users location. 
 
-### warningOverlay.js
+### overlay.js
  
 - Handles The Event Of When A Users Want To Show Or Hide The Earthquake Demonstration Warning
-
-### earthquakeInfoOverlay.js
- 
-- Handles The Event Of When A Users Want To Show Or Hide The Earthquake Information Popup
-
-### earthquakeDataChangePopup.js
- 
-- Handles The Event Of When A Users Want To Show Or Hide The Earthquake Data Change Popup
-- Allows users to change the data earthquake data that is displayed on the prototype. 
 
 ### mapStyles.js
  
