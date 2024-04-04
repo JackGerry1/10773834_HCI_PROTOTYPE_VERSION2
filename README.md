@@ -45,6 +45,7 @@ This prototype is meant to be used on laptops and desktops. It allows users to g
 - Renders Circles Reperesenting Earthquakes From USGS API
 - Styles Circles Based On Depth And Magnitude
 - Handles Onclick Events For The Rendered Circles To Show More Information About Each Earthquake
+- Calculates the distance between the earthquakes and the current users location. 
 
 ### warningOverlay.js
  
