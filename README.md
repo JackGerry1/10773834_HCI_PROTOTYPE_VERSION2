@@ -46,9 +46,18 @@ This prototype is meant to be used on laptops and desktops. It allows users to g
 - Styles Circles Based On Depth And Magnitude
 - Handles Onclick Events For The Rendered Circles To Show More Information About Each Earthquake
 
-### overlay.js
+### warningOverlay.js
  
 - Handles The Event Of When A Users Want To Show Or Hide The Earthquake Demonstration Warning
+
+### earthquakeInfoOverlay.js
+ 
+- Handles The Event Of When A Users Want To Show Or Hide The Earthquake Information Popup
+
+### earthquakeDataChangePopup.js
+ 
+- Handles The Event Of When A Users Want To Show Or Hide The Earthquake Data Change Popup
+- Allows users to change the data earthquake data that is displayed on the prototype. 
 
 ### mapStyles.js
  
