@@ -12,14 +12,18 @@ This prototype is meant to be used on laptops and desktops. It allows users to g
 
 ### How To Install And Run Locally
 
-2. Download ZIP File
+1. Download ZIP File
 2. Extract ZIP File To Folder Of Your Choice
 3. Go Inside Extracted Folder
 4. Open 10773834_HCI_PROTOTYPE_VERSION2-master In Your Favourite Code Editor (Visual Studio Code, Notepad++, etc)
 5. Now Open Your Terminal In The Same Directory As The 10773834_HCI_PROTOTYPE_VERSION2-master folder, eg C:\Users\Downloads\10773834_HCI_PROTOTYPE_VERSION2\10773834_HCI_PROTOTYPE_VERSION2-master
-6. In The Terminal, Now Run The Command "npm install", This Will Install All The NPM Packages Needed To Locallyh Run The Prototype
-7. Then Run "npm run start", Which Will Locally Host The Prototype And Run It In Your Chosen Web Browser
-8. Congratulations, You Have Now Locally Hosted The Prototype And Have The Code For It On Your System
+6. Replace with your actual **Google Maps API Key**:
+   
+   ```html
+   <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE"></script>
+7. In The Terminal, Now Run The Command "npm install", This Will Install All The NPM Packages Needed To Locally Run The Prototype
+8. Then Run "npm run start", Which Will Locally Host The Prototype And Run It In Your Chosen Web Browser
+9. Congratulations, You Have Now Locally Hosted The Prototype And Have The Code For It On Your System
 
 ### How To View The Code
 1. Complete Upto Step 4 Of The How To Install And Run Locally
