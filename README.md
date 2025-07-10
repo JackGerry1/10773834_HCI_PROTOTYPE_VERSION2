@@ -1,4 +1,4 @@
-# Earthquake Warning System Prototype
+# Earthquake Warning System Prototype V2
 
 ## What Is The Purpose Of The Prototype?
 This prototype is meant to be used on laptops and desktops. It allows users to gather information about earthquakes happening around the globe, even the ones near their current location. It will also allows users to see a demonstration warning if an earthquake occurs too close to their current location. It has added inforation about how close earthquakes are to the current users location, audio warning alarms and multiple popup windows. 
